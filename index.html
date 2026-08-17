@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume</title>
+    <style>
+      
+:root {
+  --bg: #0b1220;
+  --card: #121d2d;
+  --panel: #16253d;
+  --panel-2: #1b2d45;
+  --text: #edf5ff;
+  --muted: #8aa6c8;
+  --accent: #4ecdc4;
+  --warning: #f7b267;
+  --danger: #ff6b6b;
+  --success: #6ee7a8;
+  --shadow: rgba(12, 14, 30, 0.25);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0a1220 0%, #101f31 100%);
+  color: var(--text);
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  background: linear-gradient(135deg, #4ecdc4, #5bb7ff);
+  color: #02131d;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover { filter: brightness(1.05); }
+
+.page-shell {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 1.5rem;
+  background: rgba(19, 31, 48, 0.9);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  box-shadow: 0 18px 40px var(--shadow);
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--accent);
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.12rem;
+}
+
+h1, h2, h3, p { margin-top: 0; }
+
+h1 { margin-bottom: 0; }
+
+.status-pill {
+  background: rgba(110, 231, 168, 0.15);
+  color: var(--success);
+  border: 1px solid rgba(110, 231, 168, 0.35);
+  border-radius: 999px;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.kpi-card, .panel {
+  background: rgba(20, 35, 53, 0.9);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  box-shadow: 0 16px 34px var(--shadow);
+}
+
+.kpi-card {
+  padding: 1.2rem;
+}
+
+.kpi-label {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin-bottom: 0.4rem;
+}
+
+.kpi-value {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.kpi-meta {
+  color: var(--success);
+  font-size: 0.82rem;
+  margin-top: 0.5rem;
+}
+
+.main-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 1rem;
+}
+
+.panel {
+  padding: 1.2rem;
+}
+
+.full-width {
+  margin-top: 1rem;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.inventory-list,
+.alert-list,
+.orders-list,
+.dispatch-list {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.inventory-item,
+.alert-item,
+.order-card,
+.dispatch-card {
+  background: rgba(12, 24, 38, 0.75);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+}
+
+.inventory-item {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.product-name {
+  font-weight: 700;
+}
+
+.product-meta {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.stock-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.3rem 0.6rem;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.badge-good { background: rgba(110,231,168,0.12); color: var(--success); }
+.badge-low { background: rgba(247,178,103,0.12); color: var(--warning); }
+.badge-critical { background: rgba(255,107,107,0.12); color: var(--danger); }
+
+.priority-tag {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+}
+
+.priority-urgent { background: rgba(255,107,107,0.14); color: #ffb3b3; }
+.priority-critical { background: rgba(247,178,103,0.14); color: #ffd3a4; }
+.priority-standard { background: rgba(78,205,196,0.14); color: var(--accent); }
+
+.order-card {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr auto;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.order-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-bottom: 0.4rem;
+}
+
+.order-meta {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.order-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.status-text {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.alert-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.alert-label {
+  font-weight: 700;
+}
+
+.dispatch-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 980px) {
+  .main-grid { grid-template-columns: 1fr; }
+  .kpis { grid-template-columns: repeat(2, minmax(160px, 1fr)); }
+  .order-card,
+  .inventory-item { grid-template-columns: 1fr; }
+}
+
+
+
+  </style>
+</head>
+<body>
+    <center><img src="c:\Users\kalla\OneDrive\Pictures\Camera Roll\WhatsApp Image 2026-08-07 at 12.42.24 PM.jpegk" alt="lokanath" width="200" height="300"></center>
+    <header>
+        <center><b><h1>SARAKANAM.LOKANATH VENKATESH</h1>
+        <p>quick learner,web developer,coder,hyper active persion,ai user</p></b></center>
+    </header>
+    <section>
+    <p><b>this is my resume info
+     if you want any details  click on the bottons
+    all of my details are contained in this web is correct
+    </p></section></b>
+    <section id="personal-info">
+        <h2><center>Personal Information</h2></center>
+        <ol><button><a href="mailto:lokanathvenkateshsarakanam6@gmail.com"><strong>Email</strong></button></ol>
+        <ol><button><a href="callto:+91 9392573268"><strong>Phone:</strong></a></botton></ol>
+        <p><strong>Location:</strong> chillangi village, kirlampudi mandal, kakinada district,andhra pradesh, india</p>
+    </section>
+    
+    <section id="education">
+        <h2><center>Education</h2></center>
+        <ul>4
+            <li>
+                <strong>Degree<b></strong></b>,<i>Bachelor of technology in artifiial intellegence and machine learning[B.tech in ai&ml{CSM}]</i> Major - kakinada institute of engineering and tehnology (2025-2029)
+            </li>
+            <li>
+                <strong>Degree</strong>, Major - University Name (Year)
+            </li>
+        </ul>
+    </section>
+    
+    <section id="work-experience">
+        <h2><center>Work Experience</h2></center>
+        <ul>
+            <li>
+                <strong>Job Title</strong> - Company Name (Year - Year)
+                <p>Brief description of responsibilities and achievements.</p>
+            </li>
+            <li>
+                <strong>Job Title</strong> - Company Name (Year - Year)
+                <p>Brief description of responsibilities and achievements.</p>
+            </li>
+        </ul>
+    </section>
+    
+    <section id="skills">
+        <h2><center>Skills</h2></center>
+        <ul>
+            <li>quick learner</li>
+            <li>web developer</li>
+            <li>easily interactable with others</li>
+            <li>linux basics</li>
+            <li>ai user</li>
+        </ul>
+    </section>
+
+        <section id="learned languages">
+        <h2><center>learned languages</h2></center>
+        <ul>
+            <li>html</li>
+            <li>python</li>
+            <li>c basics</li>
+            <li>linux basics</li>
+        </ul>
+    </section>
+
+        <section id="my websites">
+        <h2><center>my websites</h2></center>
+        <ul>
+            <li><a href="https://lokanathvenkateshsarakanam.github.io/AIK-mirror/">AIK Mirror</a></li>
+            <li><a href="https://lokanathvenkateshsarakanam.github.io/LAB-EQUIPMENTS-BOOKING-SYSTEM/">LAB Equipments Booking System</a></li>
+           <li><a href="https://lokanathvenkateshsarakanam.github.io/lokanadh/">Lokanath Venkatesh Sarakanam</a></li>
+            <li><a href="https://lokanathvenkateshsarakanam.github.io/CAMPUS_BUS_ROUTE_OPTIMIZER/">Campus Bus Route Optimizer</a></li>
+        </ul>
+    </section>
+    
+    <section id="contact">
+        <h2><center>Contact</h2></center>
+        <p>If you would like to get in touch, please reach out via email or phone. given in bottons format</p>
+    </section>
+
+    <section id="communication">
+        <h2><center>communication</h2></center>
+        <ul>
+            <li>
+                <button><a href="mailto:lokanathvenkateshsarakanam6@gmail.com"><strong>Email</strong></a></button>
+                <button><a href="callto:+91 9392573268"><strong>phone</strong></a></button>
+                <button><a href="https://www.instagram.com/call_me_bunny_.143_2/?__pwa=1" target="_blank"><strong>Instagram</strong></a></button>
+                <button><a href="https://www.linkedin.com/in/lokanath-venkatesh-sarakanam-3532a1382/" target="_blank"><strong>LinkedIn</strong></a></button>
+                <button><a href="https://github.com/lokanathvenkateshsarakanam"><strong>github</strong></a></button>
+            </li>
+            <li>
+                <strong>Project Title</strong> - Brief description of the project and technologies used.
+            </li>
+        </ul>
+    
+    <footer>
+        <p><b> SARAKANAM.LOKANATH VENKATESH</b>&copy; 2026 . All rights reserved.</p></b>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
