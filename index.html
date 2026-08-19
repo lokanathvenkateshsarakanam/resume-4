@@ -252,14 +252,22 @@ h1 { margin-bottom: 0; }
   .order-card,
   .inventory-item { grid-template-columns: 1fr; }
 }
+.profile-pic {
+  display: block;          /* makes centering easier */
+  margin: 0 auto;          /* centers the image horizontally */
+  width: 200px;            /* adjust size as needed */
+  height: 200px;           /* keep equal width & height */
+  border-radius: 50%;      /* makes it perfectly circular */
+  object-fit: cover;       /* ensures the image fills the circle */
+  border: 3px solid #333;  /* optional: adds a neat border */
+}
 
 
 
   </style>
 </head>
 <body>
-    <center><img src="MY SELF.jpg" alt="Lokanath Venkatesh" width="300">
-</center>
+    <center><img src="MY SELF.jpg" alt="Lokanath Venkatesh" class="profile-pic"></center>
     <header>
         <center><b><h1>SARAKANAM.LOKANATH VENKATESH</h1>
         <p>quick learner,web developer,coder,hyper active persion,ai user</p></b></center>
